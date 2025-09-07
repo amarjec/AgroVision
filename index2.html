@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AgroVision App</title>
+    <!-- Inter font from Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
@@ -191,6 +193,7 @@
 </head>
 <body>
 
+<!-- Fixed Header for All Pages -->
 <header class="fixed-header">
     <nav class="w-full max-w-lg flex justify-between items-center px-4">
         <h1 id="appLogo" class="text-2xl font-bold text-gray-800 cursor-pointer">AgroVision</h1>
@@ -199,14 +202,17 @@
 </header>
 
 <div class="content-container">
+    <!-- Welcome Screen -->
     <div id="welcomePage" class="page active">
         <div class="flex flex-col items-center justify-center p-8 bg-white/80 backdrop-blur-md rounded-[2rem] shadow-xl">
             <img src="logo.jpeg" class="max-w-78" alt="">
+            <!-- <h1 class="text-4xl font-bold text-gray-800 mb-4">🌱 AgroVision</h1> -->
             <p class="text-lg text-gray-600 mb-8 max-w-sm text-center">Your pocket guide to diagnosing plant health and finding solutions.</p>
             <button id="getStartedBtn" class="main-button">Get Started</button>
         </div>
     </div>
 
+    <!-- Login Page -->
     <div id="loginPage" class="page">
         <div class="glass-card w-full flex flex-col items-center ">
             <img src="logo.jpeg" class="max-w-44" alt="">
@@ -220,6 +226,7 @@
         </div>
     </div>
 
+    <!-- Sign-up Page -->
     <div id="signupPage" class="page">
         <div class="glass-card w-full flex flex-col items-center ">
             <img src="logo.jpeg" class="max-w-44" alt="">
@@ -234,7 +241,9 @@
         </div>
     </div>
 
+    <!-- Main Content Pages -->
     <div id="mainPage" class="page">
+        <!-- Dashboard Page -->
         <div id="dashboardContent" class="w-full flex flex-col items-center">
             <h2 class="text-3xl font-bold text-gray-800 mb-2 mt-4">Hi, Ramu Kaka! 👋</h2>
             <p class="text-lg text-gray-600 mb-8">Ready to check on your plants?</p>
@@ -267,6 +276,7 @@
             </div>
         </div>
         
+        <!-- Diagnosis History Page -->
         <div id="historyContent" class="hidden w-full flex flex-col items-center">
             <h1 class="text-3xl font-bold text-gray-800 mb-6 mt-4">Diagnosis History</h1>
             <div class="bg-white/70 backdrop-blur-md rounded-[1.5rem] shadow-lg p-6 w-full">
@@ -311,6 +321,7 @@
             </div>
         </div>
 
+        <!-- Knowledge Base Page -->
         <div id="kbContent" class="hidden w-full flex flex-col items-center">
             <h1 class="text-3xl font-bold text-gray-800 mb-6 mt-4">Plantpedia</h1>
             <div class="bg-white/70 backdrop-blur-md rounded-[1.5rem] shadow-lg p-6 w-full">
@@ -353,6 +364,7 @@
         </div>
     </div>
 
+    <!-- New: Knowledge Base Detail Page -->
     <div id="kbDetailPage" class="page">
         <button id="kbBackBtn" class="self-start mb-4 px-4 py-2 bg-gray-200 text-gray-700 rounded-full font-semibold transition-colors duration-200 hover:bg-gray-300">
             &larr; Back
@@ -375,6 +387,7 @@
         </div>
     </div>
     
+    <!-- New: History Detail Page -->
     <div id="historyDetailPage" class="page">
         <button id="historyBackBtn" class="self-start mb-4 px-4 py-2 bg-gray-200 text-gray-700 rounded-full font-semibold transition-colors duration-200 hover:bg-gray-300">
             &larr; Back
@@ -388,52 +401,28 @@
         </div>
     </div>
 
+    <!-- Diagnosis Result Screen -->
     <div id="resultPage" class="page">
         <h1 class="text-3xl font-bold text-gray-800 mb-6 mt-4">Diagnosis Result</h1>
         <div id="resultCard" class="glass-card w-full flex flex-col items-center">
+            <!-- Loading spinner will be shown here during processing -->
             <div id="loading" class="hidden">
                 <div class="loader mb-4"></div>
                 <p class="text-gray-600">Analyzing plant... please wait.</p>
             </div>
             
             <img id="resultImage" src="" alt="Diagnosed Leaf" class="result-image hidden">
-            
-            <div id="resultContent" class="hidden w-full text-left">
-                <div class="flex items-center justify-between mb-4">
-                    <div>
-                        <h2 id="resultCropName" class="text-3xl font-semibold text-gray-700 mb-1"></h2>
-                        <p id="resultHealthStatus" class="text-xl font-medium"></p>
-                    </div>
-                    <div class="bg-red-500 text-white text-sm font-bold px-3 py-1 rounded-full" id="resultConfidence"></div>
-                </div>
-    
-                <div class="mb-6">
-                    <h3 class="text-2xl font-bold text-gray-800 mb-2">Possible Issues</h3>
-                    <ul id="resultIssuesList" class="list-disc list-inside space-y-1 text-gray-600"></ul>
-                </div>
-    
-                <div class="mb-6">
-                    <h3 class="text-2xl font-bold text-gray-800 mb-2">Why This Is Happening</h3>
-                    <ul id="resultReasonsList" class="list-disc list-inside space-y-1 text-gray-600"></ul>
-                </div>
-    
-                <div class="mb-6">
-                    <h3 class="text-2xl font-bold text-gray-800 mb-2">Suggested Actions</h3>
-                    <ul id="resultActionsList" class="list-decimal list-inside space-y-1 text-gray-600"></ul>
-                </div>
-    
-                <div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-2">Prevention Tips for Future</h3>
-                    <ul id="resultTipsList" class="list-disc list-inside space-y-1 text-gray-600"></ul>
-                </div>
-            </div>
-
+            <h2 id="resultTitle" class="text-3xl font-semibold text-gray-700 mb-2 hidden"></h2>
+            <p id="resultStatus" class="text-xl font-medium mb-4 hidden"></p>
+            <p id="resultDescription" class="text-gray-600 text-sm leading-relaxed mb-6 text-left hidden"></p>
+            <p id="resultSolution" class="text-gray-600 text-sm leading-relaxed text-left hidden"></p>
             <button id="goHomeBtn" class="mt-8 px-8 py-3 bg-gray-200 text-gray-700 rounded-full font-semibold transition-colors duration-200 hover:bg-gray-300 hidden">
                 Go Home
             </button>
         </div>
     </div>
 
+    <!-- Profile Page -->
     <div id="profilePage" class="page">
         <div class="glass-card w-full">
             <h1 class="text-3xl font-bold text-gray-800 mb-6">User Profile</h1>
@@ -467,6 +456,7 @@
     </div>
 </div>
 
+<!-- Fixed Footer with tabs -->
 <footer id="footer" class="fixed-footer">
     <button id="homeTabBtn" class="nav-button active">Dashboard</button>
     <button id="historyTabBtn" class="nav-button">History</button>
@@ -570,6 +560,22 @@
             } else {
                 footer.classList.remove('active');
             }
+            
+            // Populate result page
+            if (pageId === 'result') {
+                const resultTitle = document.getElementById('resultTitle');
+                const resultStatus = document.getElementById('resultStatus');
+                const resultDescription = document.getElementById('resultDescription');
+                const resultSolution = document.getElementById('resultSolution');
+                const resultImage = document.getElementById('resultImage');
+
+                resultImage.src = data.imageSrc;
+                resultTitle.textContent = data.title;
+                resultStatus.textContent = data.status;
+                resultStatus.style.color = data.statusColor;
+                resultDescription.textContent = data.description;
+                resultSolution.textContent = data.solution;
+            }
         };
 
         const switchTab = (tabId) => {
@@ -603,51 +609,36 @@
 
         // Function to handle showing the loading state
         const showLoading = () => {
+            // Hide all result content and show loader
             document.getElementById('resultImage').classList.add('hidden');
-            document.getElementById('resultContent').classList.add('hidden');
+            document.getElementById('resultTitle').classList.add('hidden');
+            document.getElementById('resultStatus').classList.add('hidden');
+            document.getElementById('resultDescription').classList.add('hidden');
+            document.getElementById('resultSolution').classList.add('hidden');
             document.getElementById('goHomeBtn').classList.add('hidden');
             loadingSpinner.classList.remove('hidden');
         };
 
-        // Function to handle showing the result content (UPDATED)
-        const showResult = (data) => {
+        // Function to handle showing the result content
+        const showResult = () => {
             loadingSpinner.classList.add('hidden');
             document.getElementById('resultImage').classList.remove('hidden');
-            document.getElementById('resultContent').classList.remove('hidden');
+            document.getElementById('resultTitle').classList.remove('hidden');
+            document.getElementById('resultStatus').classList.remove('hidden');
+            document.getElementById('resultDescription').classList.remove('hidden');
+            document.getElementById('resultSolution').classList.remove('hidden');
             document.getElementById('goHomeBtn').classList.remove('hidden');
-
-            document.getElementById('resultCropName').textContent = data.cropName;
-            document.getElementById('resultHealthStatus').textContent = data.healthStatus;
-            document.getElementById('resultConfidence').textContent = data.confidence;
-            document.getElementById('resultImage').src = data.imageSrc;
-
-            const populateList = (listId, items) => {
-                const listElement = document.getElementById(listId);
-                listElement.innerHTML = ''; // Clear previous content
-                items.forEach(item => {
-                    const li = document.createElement('li');
-                    li.textContent = item;
-                    listElement.appendChild(li);
-                });
-            };
-
-            populateList('resultIssuesList', data.possibleIssues);
-            populateList('resultReasonsList', data.reasons);
-            populateList('resultActionsList', data.suggestedActions);
-            populateList('resultTipsList', data.preventionTips);
         };
         
-        // Function to make the Gemini Vision API call for diagnosis (UPDATED)
+        // Function to make the Gemini Vision API call for diagnosis
         async function diagnosePlantWithGemini(base64ImageData) {
             const prompt = `Analyze this image of a plant leaf for any diseases or issues.
-                            Provide a detailed diagnosis including the crop name, health status, possible issues, reasons for the issues, suggested actions, and prevention tips for the future.
+                            Provide a diagnosis, a brief description of the condition, and a solution.
                             If the plant is healthy, state that.
-                            Format your response as a JSON object with the following keys, and provide the output in Hindi language with easy to understand words:
-                            "cropName", "healthStatus", "confidence",
-                            "possibleIssues" (an array of strings),
-                            "reasons" (an array of strings),
-                            "suggestedActions" (an array of strings),
-                            "preventionTips" (an array of strings).`;
+                            Format your response as a JSON object with the following keys:
+                            "title" (e.g., "Tomato Plant"), "status" (e.g., "Status: Healthy" or "Status: Late Blight Detected"),
+                            "statusColor" (e.g., "#22c55e" for healthy, "#ef4444" for a problem),
+                            "description", and "solution". in hindi language with easy to understand words.`;
 
             let retryCount = 0;
             const maxRetries = 3;
@@ -675,14 +666,13 @@
                             responseSchema: {
                                 type: "OBJECT",
                                 properties: {
-                                    "cropName": { "type": "STRING" },
-                                    "healthStatus": { "type": "STRING" },
-                                    "confidence": { "type": "STRING" },
-                                    "possibleIssues": { "type": "ARRAY", "items": { "type": "STRING" } },
-                                    "reasons": { "type": "ARRAY", "items": { "type": "STRING" } },
-                                    "suggestedActions": { "type": "ARRAY", "items": { "type": "STRING" } },
-                                    "preventionTips": { "type": "ARRAY", "items": { "type": "STRING" } }
-                                }
+                                    "title": { "type": "STRING" },
+                                    "status": { "type": "STRING" },
+                                    "statusColor": { "type": "STRING" },
+                                    "description": { "type": "STRING" },
+                                    "solution": { "type": "STRING" }
+                                },
+                                "propertyOrdering": ["title", "status", "statusColor", "description", "solution"]
                             }
                         }
                     };
@@ -719,26 +709,22 @@
                     console.error("Error during Gemini API call:", error);
                     // For now, return a generic error response
                     return {
-                        cropName: 'Diagnosis Failed',
-                        healthStatus: 'Status: Error',
-                        confidence: '0%',
-                        possibleIssues: ['An error occurred while trying to diagnose your plant.'],
-                        reasons: ['Please try again.'],
-                        suggestedActions: ['Ensure the image is clear and of a single plant leaf.'],
-                        preventionTips: ['Check your network connection.']
+                        title: 'Diagnosis Failed',
+                        status: 'Status: Error',
+                        statusColor: '#ef4444',
+                        description: 'An error occurred while trying to diagnose your plant. Please try again.',
+                        solution: 'Ensure the image is clear and of a single plant leaf. Check your network connection.'
                     };
                 }
             }
             
             // If all retries fail
             return {
-                cropName: 'Diagnosis Failed',
-                healthStatus: 'Status: Timeout',
-                confidence: '0%',
-                possibleIssues: ['The diagnosis request timed out.'],
-                reasons: ['Please try again later.'],
-                suggestedActions: ['Ensure you have a stable network connection and try again.'],
-                preventionTips: ['']
+                title: 'Diagnosis Failed',
+                status: 'Status: Timeout',
+                statusColor: '#ef4444',
+                description: 'The diagnosis request timed out. Please try again later.',
+                solution: 'Please ensure you have a stable network connection and try again.'
             };
         }
 
@@ -760,6 +746,7 @@
                     model: "gemini-2.5-flash-preview-tts"
                 };
 
+                
                 const apiKey = "AIzaSyBtXzhyelOsCbeRuERdt88AuQPQUkYEn44";
                 const apiUrl = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
                 
@@ -923,7 +910,7 @@
             switchTab('history');
         });
 
-        // Handle Image Upload and real Diagnosis (UPDATED)
+        // Handle Image Upload and real Diagnosis
         document.getElementById('imageUploadInput').addEventListener('change', async (event) => {
             const file = event.target.files[0];
             if (!file) return;
@@ -937,8 +924,16 @@
 
                 const diagnosisData = await diagnosePlantWithGemini(base64ImageData);
                 
-                diagnosisData.imageSrc = e.target.result;
-                showResult(diagnosisData);
+                // Set the diagnosis data and hide loader
+                navigateTo('result', {
+                    title: diagnosisData.title,
+                    status: diagnosisData.status,
+                    statusColor: diagnosisData.statusColor,
+                    description: diagnosisData.description,
+                    solution: diagnosisData.solution,
+                    imageSrc: e.target.result
+                });
+                showResult();
             };
             reader.readAsDataURL(file);
         });
