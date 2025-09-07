@@ -212,8 +212,8 @@
             <img src="logo.jpeg" class="max-w-44" alt="">
             <h1 class="text-3xl font-bold text-gray-800 mb-6">Login</h1>
             <div class="space-y-4">
-                <input type="tel" placeholder="Mobile Number" class="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:outline-none focus:border-green-500">
-                <input type="password" placeholder="Password" class="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:outline-none focus:border-green-500">
+                <input type="tel" id="loginMobile" placeholder="Mobile Number" class="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:outline-none focus:border-green-500">
+                <input type="password" id="loginPassword" placeholder="Password" class="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:outline-none focus:border-green-500">
                 <button id="loginBtn" class="main-button w-full">Login</button>
             </div>
             <p class="mt-4 text-gray-600">Don't have an account? <a href="#" id="toSignupLink" class="text-green-500 font-semibold hover:underline">Sign Up</a></p>
@@ -225,9 +225,9 @@
             <img src="logo.jpeg" class="max-w-44" alt="">
             <h1 class="text-3xl font-bold text-gray-800 mb-6">Sign Up</h1>
             <div class="space-y-4">
-                <input type="text" placeholder="Full Name" class="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:outline-none focus:border-green-500">
-                <input type="tel" placeholder="Mobile Number" class="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:outline-none focus:border-green-500">
-                <input type="password" placeholder="Password" class="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:outline-none focus:border-green-500">
+                <input type="text" id="signupName" placeholder="Full Name" class="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:outline-none focus:border-green-500">
+                <input type="tel" id="signupMobile" placeholder="Mobile Number" class="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:outline-none focus:border-green-500">
+                <input type="password" id="signupPassword" placeholder="Password" class="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:outline-none focus:border-green-500">
                 <button id="signupBtn" class="main-button w-full">Sign Up</button>
             </div>
             <p class="mt-4 text-gray-600">Already have an account? <a href="#" id="toLoginLink" class="text-green-500 font-semibold hover:underline">Login</a></p>
@@ -445,7 +445,7 @@
             <div class="space-y-4 text-left w-full">
                 <div class="flex items-center space-x-2">
                     <span class="text-gray-500">📱</span>
-                    <p class="text-gray-600"><span class="font-semibold text-gray-800">Mobile No:</span> +91 98765 43210</p>
+                    <p class="text-gray-600"><span class="font-semibold text-gray-800">Mobile No:</span> +91 9876543210</p>
                 </div>
                 <div class="flex items-center space-x-2">
                     <span class="text-gray-500">📍</span>
@@ -453,11 +453,11 @@
                 </div>
                 <div class="flex items-center space-x-2">
                     <span class="text-gray-500">📅</span>
-                    <p class="text-gray-600"><span class="font-semibold text-gray-800">Member Since:</span> January 2023</p>
+                    <p class="text-gray-600"><span class="font-semibold text-gray-800">Member Since:</span> January 2025</p>
                 </div>
                 <div class="flex items-center space-x-2">
                     <span class="text-gray-500">📊</span>
-                    <p class="text-gray-600"><span class="font-semibold text-gray-800">Total Diagnoses:</span> 42</p>
+                    <p class="text-gray-600"><span class="font-semibold text-gray-800">Total Diagnoses:</span> 12</p>
                 </div>
             </div>
             <button id="logoutBtn" class="mt-8 px-8 py-3 bg-red-500 text-white rounded-full font-semibold transition-colors duration-200 hover:bg-red-600">
@@ -601,7 +601,6 @@
             navigateTo('historyDetail');
         };
 
-        // Function to handle showing the loading state
         const showLoading = () => {
             document.getElementById('resultImage').classList.add('hidden');
             document.getElementById('resultContent').classList.add('hidden');
@@ -609,7 +608,6 @@
             loadingSpinner.classList.remove('hidden');
         };
 
-        // Function to handle showing the result content (UPDATED)
         const showResult = (data) => {
             loadingSpinner.classList.add('hidden');
             document.getElementById('resultImage').classList.remove('hidden');
@@ -623,7 +621,7 @@
 
             const populateList = (listId, items) => {
                 const listElement = document.getElementById(listId);
-                listElement.innerHTML = ''; // Clear previous content
+                listElement.innerHTML = '';
                 items.forEach(item => {
                     const li = document.createElement('li');
                     li.textContent = item;
@@ -637,7 +635,6 @@
             populateList('resultTipsList', data.preventionTips);
         };
         
-        // Function to make the Gemini Vision API call for diagnosis (UPDATED)
         async function diagnosePlantWithGemini(base64ImageData) {
             const prompt = `Analyze this image of a plant leaf for any diseases or issues.
                             Provide a detailed diagnosis including the crop name, health status, possible issues, reasons for the issues, suggested actions, and prevention tips for the future.
@@ -651,7 +648,7 @@
 
             let retryCount = 0;
             const maxRetries = 3;
-            const initialDelay = 1000; // 1 second
+            const initialDelay = 1000;
 
             while (retryCount < maxRetries) {
                 try {
@@ -708,7 +705,6 @@
                             throw new Error("Invalid response structure from Gemini API");
                         }
                     } else if (response.status === 429) {
-                        // Too many requests, retry with exponential backoff
                         const delay = initialDelay * Math.pow(2, retryCount);
                         await new Promise(res => setTimeout(res, delay));
                         retryCount++;
@@ -717,7 +713,6 @@
                     }
                 } catch (error) {
                     console.error("Error during Gemini API call:", error);
-                    // For now, return a generic error response
                     return {
                         cropName: 'Diagnosis Failed',
                         healthStatus: 'Status: Error',
@@ -730,7 +725,6 @@
                 }
             }
             
-            // If all retries fail
             return {
                 cropName: 'Diagnosis Failed',
                 healthStatus: 'Status: Timeout',
@@ -742,7 +736,6 @@
             };
         }
 
-        // Function to make the Gemini TTS API call
         async function readAloudWithGemini(text) {
             try {
                 const payload = {
@@ -775,7 +768,6 @@
                 const mimeType = part?.inlineData?.mimeType;
 
                 if (audioData && mimeType && mimeType.startsWith("audio/")) {
-                    // Utility function to convert base64 to ArrayBuffer
                     const base64ToArrayBuffer = (base64) => {
                         const binaryString = window.atob(base64);
                         const len = binaryString.length;
@@ -789,11 +781,10 @@
                     const pcmData = base64ToArrayBuffer(audioData);
                     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
                     
-                    // The API returns signed PCM16 audio data.
                     const pcm16 = new Int16Array(pcmData);
                     const float32 = new Float32Array(pcm16.length);
                     for (let i = 0; i < pcm16.length; i++) {
-                        float32[i] = pcm16[i] / 32768; // Convert to float32
+                        float32[i] = pcm16[i] / 32768;
                     }
 
                     const audioBuffer = audioCtx.createBuffer(1, float32.length, audioCtx.sampleRate);
@@ -834,15 +825,38 @@
             navigateTo('login');
         });
 
+        // VALIDATION LOGIC UPDATED HERE
         document.getElementById('loginBtn').addEventListener('click', () => {
-            navigateTo('main');
-            switchTab('dashboard');
+            const mobile = document.getElementById('loginMobile').value;
+            const password = document.getElementById('loginPassword').value;
+
+            if (mobile.length !== 10) {
+                alert("Please provide a valid mobile number.");
+            } else if (password.length < 6) {
+                alert("Create a Strong Password.");
+            } else {
+                navigateTo('main');
+                switchTab('dashboard');
+            }
         });
 
         document.getElementById('signupBtn').addEventListener('click', () => {
-            navigateTo('main');
-            switchTab('dashboard');
+            const name = document.getElementById('signupName').value;
+            const mobile = document.getElementById('signupMobile').value;
+            const password = document.getElementById('signupPassword').value;
+
+            if (name === "") {
+                alert("Full Name is required.");
+            } else if (mobile.length !== 10) {
+                alert("Please provide a valid mobile number.");
+            } else if (password.length < 6) {
+                alert("Create a Strong Password.");
+            } else {
+                navigateTo('main');
+                switchTab('dashboard');
+            }
         });
+        // END OF UPDATED VALIDATION LOGIC
         
         document.getElementById('toSignupLink').addEventListener('click', (e) => {
             e.preventDefault();
@@ -923,7 +937,7 @@
             switchTab('history');
         });
 
-        // Handle Image Upload and real Diagnosis (UPDATED)
+        // Handle Image Upload and real Diagnosis
         document.getElementById('imageUploadInput').addEventListener('change', async (event) => {
             const file = event.target.files[0];
             if (!file) return;
